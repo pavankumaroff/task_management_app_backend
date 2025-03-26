@@ -27,7 +27,7 @@ router.post("/", [validator(validate), auth], async (req, res) => {
     description: req.body.description,
   });
 
-  res.send(_.pick(task, ["_id", "userId", "title", "completed"]));
+  res.send(_.pick(task, ["_id", "userId", "title", "description", "status"]));
 });
 
 router.put(
@@ -46,7 +46,7 @@ router.put(
 
     task.title = req.body.title;
     task.description = req.body.description;
-    if (req.body.status == "Completed") task.status = req.body.status;
+    task.status = req.body.status;
 
     await task.save();
 
